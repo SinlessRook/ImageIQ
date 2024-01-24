@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Upload</title>
+    <link rel="stylesheet" href="static\styles_index.css">
+    <title>Your Website</title>
 </head>
-<body align="center">
-    <h1>Image Upload</h1>
-    <form action="/" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="image/*" required>
-        <button type="submit" command="Upload">Upload</button>
-        <button type="submit" command="upload">rotate</button>
-    </form>
-    
-    {% if img_data %}
-        <h2>Modified Image</h2>
-        <img src="data:image/png;base64,{{ img_data }}" alt="Modified Image">
-    {% endif %}
+<body>
+
+    <!-- Splash Screen -->
+    <div id="header">
+        <h1 id="title">ImageIQ</h1>
+        <p id="description">Now all the image processing functions in your finger tips.Welcome to ImageIQ, your one-stop solution for all your image processing needs.
+            With our easy-to-use interface and powerful processing tools, you can edit and enhance your images like a pro.</p>
+      </div>
+    <button id="cta" onclick="location.href='home.html';">GET STARTED</button> 
 </body>
 </html>
 

@@ -1,0 +1,102 @@
+body {
+    background-image: url("./assets/background_splashScreen.png");
+    background-size:50%;
+  }
+
+  #title {
+        position: absolute;
+        width: 80%; /* Use a percentage for width */
+        max-width: 400px; /* Set a maximum width to maintain readability on larger screens */
+        height: auto; /* Allow the height to adjust proportionally based on the width */
+        left: 36%; /* Center the element horizontally */
+        top: 4%; /* Adjust the top position as needed */
+      
+        font-family: 'Inter';
+        font-style: italic;
+        font-weight: 500;
+        font-size: 6vw; /* Use viewport width units for font size */
+        line-height: 1.2; /* Adjust line height as needed */
+        text-align: center;
+      
+        color: #7FCDEE;
+      }
+      
+      /* Add a media query for smaller screens if needed */
+      @media only screen and (max-width: 600px) {
+        #ImageIQ {
+          font-size: 7vw; /* Adjust font size for smaller screens */
+        } 
+  }
+
+  #description {
+    position: absolute;
+    width: 100%; /* Use a percentage for width */
+    height: auto; /* Allow the height to adjust proportionally based on the width */
+    left: 2%; /* Center the element horizontally */
+    top: 30%; /* Adjust the top position as needed */
+  
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 3vw; /* Use viewport width units for font size */
+    line-height: 1.2; /* Adjust line height as needed */
+  
+    color: #FFFFFF;
+  }
+  
+  /* Add a media query for smaller screens if needed */
+  @media only screen and (max-width: 600px) {
+    #description {
+      font-size: 6vw; /* Adjust font size for smaller screens */
+    }
+  }
+
+  #cta{
+    position: absolute;
+width: 30%;
+height: auto;
+left: 503px;
+top: 80%;
+    appearance: none;
+    background-color: #FFFFFF;
+    border-radius: 40em;
+    border-style: none;
+    box-shadow: #ADCFFF 0 -12px 6px inset;
+    box-sizing: border-box;
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -.24px;
+    margin: 0;
+    outline: none;
+    padding: 1rem 1.3rem;
+    quotes: auto;
+    text-align: center;
+    text-decoration: none;
+    transition: all .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  #cta:hover {
+    background-color: #FFC229;
+    box-shadow: #FF6314 0 -6px 8px inset;
+    transform: scale(1.125);
+  }
+
+#cta:active {
+    transform: scale(1.025);
+  }
+  
+  @media (min-width: 768px) {
+    #cta {
+      font-size: 1.5rem;
+      padding: .75rem 2rem;
+    }
+  }
+
+ 
