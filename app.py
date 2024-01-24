@@ -9,7 +9,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/upload', methods=['POST'])
+@app.route('/', methods=['POST'])
 def upload():
     if 'file' not in request.files:
         return "No file part"
