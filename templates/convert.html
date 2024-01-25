@@ -1,2 +1,113 @@
-{% extends "base.html" %} {% block head%}{{super()}}
+{% extends "base.html" %} {% block head %}{{super()}}
+{% endblock %}
+{% block content %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+  <title>Document</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const imageForm = document.getElementById("imageForm");
+    const resultDiv = document.getElementById("result");
+    const inputImageDisplay = document.getElementById("input_image_display");
+    const outputImageDisplay = document.getElementById("output_image_display");
+
+    imageForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+
+        fetch("/convert_image", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            inputImageDisplay.innerHTML = "Input Image: <img src='" + data.input_path + "' alt='Input Image'>";
+            outputImageDisplay.innerHTML = "Output Image: <img src='" + data.output_path + "' alt='Output Image'>";
+            resultDiv.style.display = "block";
+        })
+        .catch(error => {
+            console.error("Error:", error);
+        });
+    });
+});
+  </script>
+  <style>
+    body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(meclab_background.jpg);
+    background-size: cover;
+    font-family: Poppins;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+    max-width: 800px;
+    height: 90vh;
+    width: 90vh;
+    margin: 50px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 50px rgba(0, 0, 0);
+}
+
+form {
+    margin: 20px;
+    font-weight: bold;
+}
+
+#result {
+    margin-top: 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.h1 {
+  text-align: center;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Converting Format Of Image</h1>
+    
+    <form id="imageForm" action="/convert_image" method="post" enctype="multipart/form-data">
+        <label for="input_image">Please select image :</label>
+        <input type="file" name="input_image" id="input_image" accept=".jpg, .jpeg, .png">
+        <br>
+        <label for="output_format">Please select format of output :</label>
+        <select name="output_format" id="output_format">
+            <option value="JPEG">JPEG</option>
+            <option value="PNG">PNG</option>
+        </select>
+        <br>
+        <br>
+        <input type="submit" value="Convert">
+    </form>
+
+    <div id="result" style="display: none;">
+        <h2>Conversion Result</h2>
+        <p id="input_image_display">Input Image: </p>
+        <p id="output_image_display">Output Image: </p>
+        <a href="/">Go back</a>
+    </div>
+</div>
+
+</body>
 {% endblock %}
