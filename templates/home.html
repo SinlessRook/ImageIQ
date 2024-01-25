@@ -21,8 +21,13 @@
     left: 10%;
     width: 25%;
     height: 1100%;
+    cursor: pointer;
 
 }
+.rectangle button:hover{
+    transform: scale(0.9);
+    transition: 0.5s;
+  }
 .rectangle button img {
     width: 20px; /* Adjust the width of the image */
     height: 20px; /* Adjust the height of the image */
@@ -31,17 +36,17 @@
 <div class="rectangle">
     <div class="First_3">
     <button style="background-image: url('./static/assets/pdf.png');background-size:cover;border-radius: 10px;" 
-    onclick="redirectToAnotherPage('pdf')"></button>
+    onclick="redirectToAnotherPage('pdf-editor')"></button>
     <button style="background-image: url('./static/assets/convert.png');background-size: cover;border-radius: 10px;"
-    onclick="redirectToAnotherPage('convert')"></button>></button>
+    onclick="redirectToAnotherPage('convert-format')"></button>></button>
     <button style="background-image: url('./static/assets/edit.png');background-size: cover;border-radius: 10px;"
-    onclick="redirectToAnotherPage('edit')"></button>></button>
+    onclick="redirectToAnotherPage('edit-image')"></button>></button>
     </div><div class="Second_3">
-    <button style="background-image: url('./static/assets/extract.jpg');background-size: cover;border-radius: 10px;"
-    onclick="redirectToAnotherPage('extract')"></button>></button>
-    <button style="background-image: url('./static/assets/chatbot.jpg');background-size: cover;border-radius: 10px;"
+    <button style="background-image: url('./static/assets/extract.png');background-size: cover;border-radius: 10px;"
+    onclick="redirectToAnotherPage('extract-data')"></button>></button>
+    <button style="background-image: url('./static/assets/chatbot.png');background-size: cover;border-radius: 10px;"
     onclick="redirectToAnotherPage('chatbot')"></button>></button>
-    <button style="background-image: url('./static/assets/help.jpg');background-size: cover;border-radius: 10px;"
+    <button style="background-image: url('./static/assets/help.png');background-size: cover;border-radius: 10px;"
     onclick="redirectToAnotherPage('help')"></button>></button>
     </div>
 </div>

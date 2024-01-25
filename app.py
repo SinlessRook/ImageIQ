@@ -40,19 +40,19 @@ def index():
 def home():
     return render_template('home.html')
 
-@app.route('/pdf')
+@app.route('/pdf-editor')
 def pdf():
     return render_template('pdf.html')
 
-@app.route('/extract')
+@app.route('/extract-data')
 def extract():
     return render_template('extract.html')
 
-@app.route('/edit')
+@app.route('/edit-image')
 def edit():
     return render_template('edit.html')
 
-@app.route('/convert')
+@app.route('/convert-format')
 def format():
     return render_template('convert.html')
 

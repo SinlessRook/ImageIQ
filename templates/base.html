@@ -37,12 +37,12 @@ color: rgba(0, 0, 0, 0.69);
 
     }
 
-    .dropdown {
+    .dropdown_base {
       position: relative;
       display:inline-block;
     }
 
-    .dropdown-content {
+    .dropdown-content_base {
       display: none;
       position: absolute;
       background-color: #333;
@@ -51,11 +51,11 @@ color: rgba(0, 0, 0, 0.69);
       left: -110%;
     }
 
-    .dropdown:hover .dropdown-content {
+    .dropdown_base:hover .dropdown-content_base {
       display: block;;
     }
 
-    .dropdown-item {
+    .dropdown-item_base {
       padding: 12px;
       display: block;
       color: #fff;
@@ -71,12 +71,12 @@ color: rgba(0, 0, 0, 0.69);
   </div>
   <span id="site-name">ImageIQ</span>
 
-  <div class="dropdown">
+  <div class="dropdown_base">
     <span><i class="fa fa-bars" style="font-size:48px; color: #87847C;"></i></span>
-    <div class="dropdown-content">
-      <a href="#" class="dropdown-item">Option 1</a>
-      <a href="#" class="dropdown-item">Option 2</a>
-      <a href="#" class="dropdown-item">Option 3</a>
+    <div class="dropdown-content_base">
+      <a href="#" class="dropdown-item_base">Option 1</a>
+      <a href="#" class="dropdown-item_base">Option 2</a>
+      <a href="#" class="dropdown-item_base">Option 3</a>
     </div>
   </div>
 </nav>

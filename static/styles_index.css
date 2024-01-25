@@ -1,6 +1,6 @@
 body {
     background-image: url("./assets/background_splashScreen.png");
-    background-size:50%;
+    background-size:cover
   }
 
   #title {
@@ -30,18 +30,17 @@ body {
 
   #description {
     position: absolute;
-    width: 100%; /* Use a percentage for width */
+    width: 95%; /* Use a percentage for width */
     height: auto; /* Allow the height to adjust proportionally based on the width */
-    left: 2%; /* Center the element horizontally */
     top: 30%; /* Adjust the top position as needed */
-  
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 3vw; /* Use viewport width units for font size */
     line-height: 1.2; /* Adjust line height as needed */
-  
     color: #FFFFFF;
+    margin-right: 2%;
+    margin-left: 2%;
   }
   
   /* Add a media query for smaller screens if needed */
@@ -83,7 +82,7 @@ top: 80%;
   }
   
   #cta:hover {
-    background-color: #FFC229;
+    background-color: #ff9429;
     box-shadow: #FF6314 0 -6px 8px inset;
     transform: scale(1.125);
   }
