@@ -1,5 +1,76 @@
 {% extends "base.html" %} {% block head %}{{super()}}
 {% endblock %}
 {% block content %}
+<head>
+    <link href="style.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+</head>
+<body >
+  <!DOCTYPE html>
+<html>
+<head>
+
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<!--Get your own code at fontawesome.com-->
+</head>
+<body>
+    <h1> Hello everybody welcome
+    </h1>
+    <h2 class="ok4">Here we have options for uploading the document,editting the document and for downloading the saved document</h2>
+   <div class="ok">
+     <h2 class="ok1"> for Uploading image </h2>
+   
+     <!DOCTYPE html>
+     <html>
+     <body>
+     
+    
+     
+     <form action="/action_page.php">
+      <div class="no1">
+       <input type="file" id="myFile" name="filename">
+      </div>
+       <div class="no">
+       <input type="submit">
+      </div>
+     </form>
+     
+     </body>
+     </html>
+    </div>
+    
+    <div class="if">
+    <h2 class="ok2">for editting the image</h2>
+<!-- Add icon library -->
+
+        <div class="dropdown">
+            <button class="dropbtn">Edit Options</button>
+            <div class="dropdown-content">
+              <div>
+              <button style='font-size:22px'>Rotate </button>
+            </div>
+            <div>
+              <button style='font-size:22px'>For adjusting the brightness </button>
+            </div>
+            <div>
+              <button style='font-size:22px'>Resizing the image></button>
+            </div>
+            <div>
+              <button style='font-size:22px'>Croping  the image</button>
+            </div>
+            <div>
+              <button style='font-size:22px'>For adding text to images</button>
+            </div>
+            </div>
+          </div>
+    <div class="for">
+        <h2 class="ok3">For the downloading the saved the document </h2>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Auto width -->
+<button class="btn"><i class="fa fa-download"></i> Download</button>    
+    </div>
+</body>
 {% endblock %}
