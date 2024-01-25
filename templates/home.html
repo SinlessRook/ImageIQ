@@ -30,13 +30,24 @@
   </style>
 <div class="rectangle">
     <div class="First_3">
-    <button style="background-image: url('./static/assets/pdf.png');background-size:cover;border-radius: 10px;"></button>
-    <button style="background-image: url('./static/assets/convert.png');background-size: cover;border-radius: 10px;"></button>
-    <button style="background-image: url('./static/assets/edit.png');background-size: cover;border-radius: 10px;"></button>
+    <button style="background-image: url('./static/assets/pdf.png');background-size:cover;border-radius: 10px;" 
+    onclick="redirectToAnotherPage('pdf')"></button>
+    <button style="background-image: url('./static/assets/convert.png');background-size: cover;border-radius: 10px;"
+    onclick="redirectToAnotherPage('convert')"></button>></button>
+    <button style="background-image: url('./static/assets/edit.png');background-size: cover;border-radius: 10px;"
+    onclick="redirectToAnotherPage('edit')"></button>></button>
     </div><div class="Second_3">
-    <button style="background-image: url('./static/assets/extract.jpg');background-size: cover;border-radius: 10px;"></button>
-    <button style="background-image: url('./static/assets/chatbot.jpg');background-size: cover;border-radius: 10px;"></button>
-    <button style="background-image: url('./static/assets/help.jpg');background-size: cover;border-radius: 10px;"></button>
+    <button style="background-image: url('./static/assets/extract.jpg');background-size: cover;border-radius: 10px;"
+    onclick="redirectToAnotherPage('extract')"></button>></button>
+    <button style="background-image: url('./static/assets/chatbot.jpg');background-size: cover;border-radius: 10px;"
+    onclick="redirectToAnotherPage('chatbot')"></button>></button>
+    <button style="background-image: url('./static/assets/help.jpg');background-size: cover;border-radius: 10px;"
+    onclick="redirectToAnotherPage('help')"></button>></button>
     </div>
 </div>
+<script>
+    function redirectToAnotherPage(option) {
+      window.location.href = "/" + option;
+    }
+  </script>
 {% endblock %}

@@ -52,9 +52,9 @@ def extract():
 def edit():
     return render_template('edit.html')
 
-@app.route('/format')
+@app.route('/convert')
 def format():
-    return render_template('format.html')
+    return render_template('convert.html')
 
 
 if __name__ == '__main__':
