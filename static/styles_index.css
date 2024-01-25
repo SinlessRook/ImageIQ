@@ -13,7 +13,7 @@ body {
       
         font-family: 'Inter';
         font-style: italic;
-        font-weight: 500;
+        font-weight: 600;
         font-size: 6vw; /* Use viewport width units for font size */
         line-height: 1.2; /* Adjust line height as needed */
         text-align: center;
@@ -37,7 +37,7 @@ body {
   
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 3vw; /* Use viewport width units for font size */
     line-height: 1.2; /* Adjust line height as needed */
   

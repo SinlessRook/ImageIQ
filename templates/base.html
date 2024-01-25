@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      height: 20%;
+      background-color:#D9D9D9;
+      color: #fff;
+      padding: 10px;
+      display: flex;
+      justify-content:space-between;
+      align-items: center;
+    }
+
+    #logo {
+      width: 140px; /* Adjust the width of your logo */
+      border-radius: 20%;
+
+    }
+
+    #site-name {
+font-family: 'Inter';
+font-style: italic;
+font-weight: 500;
+font-size: 100px;
+line-height: 121px;
+color: rgba(0, 0, 0, 0.69);
+
+    }
+
+    .dropdown {
+      position: relative;
+      display:inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #333;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      left: -110%;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;;
+    }
+
+    .dropdown-item {
+      padding: 12px;
+      display: block;
+      color: #fff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <img src=".\static\assets\logo.jpg" alt="Logo" id="logo">
+  </div>
+  <span id="site-name">ImageIQ</span>
+
+  <div class="dropdown">
+    <span><i class="fa fa-bars" style="font-size:48px; color: #87847C;"></i></span>
+    <div class="dropdown-content">
+      <a href="#" class="dropdown-item">Option 1</a>
+      <a href="#" class="dropdown-item">Option 2</a>
+      <a href="#" class="dropdown-item">Option 3</a>
+    </div>
+  </div>
+</nav>
+{% block content %}{% endblock %}
+</body>
+</html>
