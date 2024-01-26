@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, send_file
 from PIL import Image
 from io import BytesIO
 import base64
+from werkzeug.utils import secure_filename
+import os
+import pypdf
 
 app = Flask(__name__)
 
@@ -55,6 +58,33 @@ def edit():
 @app.route('/convert-format')
 def format():
     return render_template('convert.html')
+
+@app.route('/chatbot')
+def chat():
+    return render_template('chatbot.html')
+
+@app.route('/help')
+def help():
+    return render_template('help.html')
+
+@app.route("/upload", methods=['POST', 'GET'])
+def edit_pdf():
+    if 'file' not in request.files:
+        return "no file part"
+
+    file = request.files['file']
+
+    if file.filename == '':
+        return "no selected file"
+
+    if file:
+        file=request.files['file']
+        try:
+            return render_template('view_pdf.html',file_data=file)
+        except Exception as e:
+            return str(e)
+        
+    
 
 
 if __name__ == '__main__':
