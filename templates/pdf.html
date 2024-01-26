@@ -1,5 +1,205 @@
 {% extends "base.html" %} {% block head %}{{super()}}
 {% endblock %}
 {% block content %}
+<style>
+body {
+    font-family: Arial, sans-serif;
+   }
+   
+   .container {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+   }
+   
+   h1 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 61px;
+    text-align: center;
+    margin-bottom: 0.5em;
+    color: rgba(0, 0, 0, 0.69);
+   }
+   
+   h2 {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 500;
+    font-size: 50px;
+    line-height: 61px;
+    text-align: center;
 
+    color: rgba(0, 0, 0, 0.69);
+   }
+   
+   p {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 61px;
+    text-align: center;
+    color: rgba(67, 67, 67, 0.62);
+    margin-top: 2em;
+   }
+.button-72{
+  margin: 20px;
+  width: auto;
+  align-items: center;
+  background-color: initial;
+  background-image: linear-gradient(rgba(179, 132, 201, .84), rgba(57, 31, 91, .84) 50%);
+  border-radius: 2px;
+  border-width: 0;
+  box-shadow: rgba(57, 31, 91, 0.24) 0 2px 2px,rgba(179, 132, 201, 0.4) 0 8px 12px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  flex-direction:row;
+  font-family: Quicksand,sans-serif;
+  font-weight: 700;
+  justify-content: center;
+  letter-spacing: .04em;
+  line-height: 16px;
+  margin: 0;
+  padding: 18px 18px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: rgba(255, 255, 255, 0.4) 0 0 4px,rgba(255, 255, 255, 0.2) 0 0 12px,rgba(57, 31, 91, 0.6) 1px 1px 4px,rgba(57, 31, 91, 0.32) 4px 4px 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  height: 50px;
+}
+.button-71{
+  margin: 20px;
+  width: auto;
+  align-items: center;
+  background-color: initial;
+  background-image: linear-gradient(rgba(179, 132, 201, .84), rgba(57, 31, 91, .84) 50%);
+  border-radius: 2px;
+  border-width: 0;
+  box-shadow: rgba(57, 31, 91, 0.24) 0 2px 2px,rgba(179, 132, 201, 0.4) 0 8px 12px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  flex-direction:row;
+  font-family: Quicksand,sans-serif;
+  font-weight: 700;
+  justify-content: center;
+  letter-spacing: .04em;
+  line-height: 16px;
+  margin: 0;
+  padding: 18px 18px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: rgba(255, 255, 255, 0.4) 0 0 4px,rgba(255, 255, 255, 0.2) 0 0 12px,rgba(57, 31, 91, 0.6) 1px 1px 4px,rgba(57, 31, 91, 0.32) 4px 4px 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+}
+.button-72:hover,.button-71:hover {
+  background-image: linear-gradient(#B384C9, #391F5B 50%);
+}
+
+@media (min-width: 768px) {
+  .button-72,.button-71 {
+    font-size: 21px;
+    padding: 18px 34px;
+  }
+}
+
+
+.horizontal-centre{
+  display: flex;
+  border: solid #391F5B;
+  margin: 0;
+  left: 50%;
+  position: absolute;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  margin-bottom: 2em;
+}
+li{
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 500;
+  font-size: 50px;
+  line-height: 61px;
+  /* identical to box height */
+  text-align:start;
+
+  color: rgba(0, 0, 0, 0.69);
+  }
+  input[type="file"]::file-selector-button {
+  border-radius: 2px;
+  padding: 16px;
+  height: 50px;
+  cursor: pointer;
+  background-color: white;
+  border:1px solid rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+  margin-right: 16px;
+  transition: background-color 200ms;
+}
+
+/* file upload button hover state */
+input[type="file"]::file-selector-button:hover {
+  background-color: #f3f4f6;
+}
+
+/* file upload button active state */
+input[type="file"]::file-selector-button:active {
+  background-color: #e5e7eb;
+}
+
+</style>
+<div class="container">
+    <h1>Your PDF editing companion</h1>
+    <p>Edit pdf file for free.</p>
+    <form action="\upload" method="POST" enctype="multipart/form-data" >
+      <div class="horizontal-centre">
+    <input type="file" id="pdf_file" name="file" accept=".pdf"  required multiple>
+    
+    <button type="submit" class="button-72"><i class="fa fa-upload" ></i></button>
+    </div>
+      <!-- <script>
+      let input = document.getElementById("inputTag");
+      let imageName = document.getElementById("imageName")
+
+      input.addEventListener("change", ()=>{
+          let inputImage = document.querySelector("input[type=file]").files[0];
+          imageName.innerText = inputImage.name;
+
+          
+      })
+    </script> -->
+    </form>
+    <br>
+    <p>Your files stays private. We respect your privacy and delete the files within 1 hour</p>
+    <h2>What can I do with ImageIQ (pdf files)</h2>
+    <ol>
+    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Add Text to pdf</li>
+      <button class="button-71"><i class="fa fa-check-square" ></i></button>
+    </div>
+    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Add Text to pdf</li>
+      <button class="button-71"><i class="fa fa-check-square" ></i></button>
+    </div>
+    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Add images to pdf</li>
+      <button class="button-71"><i class="fa fa-check-square" ></i></button>
+    </div>
+    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Merge pdfs</li>
+      <button class="button-71"><i class="fa fa-check-square" ></i></button>
+    </div>
+    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Split pdf</li>
+      <button class="button-71"><i class="fa fa-check-square" ></i></button>
+    </div>
+    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Reorder pdf</li>
+      <button class="button-71"><i class="fa fa-check-square" ></i></button>
+    </div>
+    </ol>
+    <br>
 {% endblock %}
