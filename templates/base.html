@@ -61,6 +61,26 @@ color: rgba(0, 0, 0, 0.69);
       color: #fff;
       text-decoration: none;
     }
+        .dropdown-item_base:hover {
+      background-color: #ddd;
+    }
+
+    .dropdown_base:hover{
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .dropdown-content_base{
+      animation: fadeIn 0.3s ease-in-out;
+      left:-110%;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
   </style>
 </head>
 <body>
