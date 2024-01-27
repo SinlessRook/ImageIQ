@@ -156,6 +156,16 @@ input[type="file"]::file-selector-button:active {
   background-color: #e5e7eb;
 }
 
+.collapse_window_for_split{
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+
+
 </style>
 <div class="container">
     <h1>Your PDF editing companion</h1>
@@ -182,24 +192,52 @@ input[type="file"]::file-selector-button:active {
     <p>Your files stays private. We respect your privacy and delete the files within 1 hour</p>
     <h2>What can I do with ImageIQ (pdf files)</h2>
     <ol>
-    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Add Text to pdf</li>
-      <button class="button-71"><i class="fa fa-check-square" ></i></button>
+      <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Split PDF</li>
+        <button class="button-71" onclick="expand('split')"><i class="fa fa-check-square" id="user_button_for_split"></i></button>
+      </div>
+    <div id="collapse_window_for_split" style="display: none;">
+        <h2>PDF Splitter</h2>
+        <form action="split_pdf.py" method="post">
+            <label for="startPage">Start Page:</label>
+            <input type="number" id="startPage" name="startPage" required>
+            <label for="endPage">End Page:</label>
+            <input type="number" id="endPage" name="endPage" required>
+            <button type="submit">Split PDF</button>
+        </form>
+        <br>
+      </div>
+    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Merge PDF</li>
+      <button class="button-71" onclick="expand('merge')"><i class="fa fa-check-square" id="user_button_for_merge"></i></button>
     </div>
-    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Add Text to pdf</li>
-      <button class="button-71"><i class="fa fa-check-square" ></i></button>
+    <div id="collapse_window_for_merge" style="display: none;">
+      <h2>Merged pdf</h2>
     </div>
-    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Add images to pdf</li>
-      <button class="button-71"><i class="fa fa-check-square" ></i></button>
+    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>ENCRYPT PDF</li>
+      <button class="button-71" onclick="expand('encrypt')"><i class="fa fa-check-square" id="user_button_for_encrypt"></i></button>
     </div>
-    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Merge pdfs</li>
-      <button class="button-71"><i class="fa fa-check-square" ></i></button>
+    <div id="collapse_window_for_encrypt" style="display: none;">
+      <h2>PDF Encryptor</h2>
+    <form action="encrypt_pdf.py" method="post" enctype="multipart/form-data">
+        <label for="pdfFile">Select PDF File:</label>
+        <input type="file" id="pdfFile" name="pdfFile" accept=".pdf" required>
+
+        <label for="password">Enter Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Encrypt PDF</button>
+    </form>
     </div>
-    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Split pdf</li>
-      <button class="button-71"><i class="fa fa-check-square" ></i></button>
-    </div>
-    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Reorder pdf</li>
-      <button class="button-71"><i class="fa fa-check-square" ></i></button>
-    </div>
+
     </ol>
+    <script>
+      function expand(option){
+        if (document.getElementById("collapse_window_for_"+option).style.display == "block"){
+          document.getElementById("collapse_window_for_"+option).style.display = "none";
+        document.getElementById("user_button_for_"+option).className="fa fa-check-square";
+        }else{
+        document.getElementById("collapse_window_for_"+option).style.display = "block";
+        document.getElementById("user_button_for_"+option).className="fa fa-times";}
+      }
+    </script>
     <br>
 {% endblock %}
