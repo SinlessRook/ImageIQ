@@ -4,9 +4,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
   <title>Document</title>
+  <style>
+    body {
+    background-image:url('./static/assets/meclab_background_convert.jpg');
+    background-size: cover;
+    font-family: Poppins;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+    max-width: 800px;
+    height: 90vh;
+    width: 90vh;
+    margin: 50px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 50px rgba(0, 0, 0);
+    margin-left: 28%;
+}
+form {
+    margin: 20px;
+    font-weight: bold;
+}
+#result {
+    margin-top: 20px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+.h1 {
+  text-align: center;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Converting Format Of Image</h1>
+    
+    <form id="imageForm" action="/convert_image" method="post" enctype="multipart/form-data">
+        <label for="input_image">Please select image :</label>
+        <input type="file" name="input_image" id="input_image" accept=".jpg, .jpeg, .png">
+        <br>
+        <label for="output_format">Please select format of output :</label>
+        <select name="output_format" id="output_format">
+            <option value="JPEG">JPEG</option>
+            <option value="PNG">PNG</option>
+        </select>
+        <br>
+        <br>
+        <input type="submit" value="Convert">
+    </form>
+
+    <div id="result" style="display: none;">
+        <h2>Conversion Result</h2>
+        <p id="input_image_display">Input Image: </p>
+        <p id="output_image_display">Output Image: </p>
+        <a href="/">Go back</a>
+    </div>
+  </div>
   <script>
     document.addEventListener("DOMContentLoaded", function() {
     const imageForm = document.getElementById("imageForm");
@@ -35,72 +96,6 @@
     });
 });
   </script>
-  <style>
-    body {
-    background-image:url('./static/assets/meclab_background_convert.jpg');
-    background-size: cover;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #000000;
-    max-width: 800px;
-    height: 90vh;
-    width: 90vh;
-    margin: 50px;
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 20px;
-    border-radius: 30px;
-    box-shadow: 0 0 50px rgba(0, 0, 0);
-    margin-left: 28%;
-}
-
-form {
-    margin: 20px;
-    font-weight: bold;
-}
-
-#result {
-    margin-top: 20px;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-.h1 {
-  text-align: center;
-}
-
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Converting Format Of Image</h1>
-    
-    <form id="imageForm" action="/convert_image" method="post" enctype="multipart/form-data">
-        <label for="input_image">Please select image :</label>
-        <input type="file" name="input_image" id="input_image" accept=".jpg, .jpeg, .png">
-        <br>
-        <label for="output_format">Please select format of output :</label>
-        <select name="output_format" id="output_format">
-            <option value="JPEG">JPEG</option>
-            <option value="PNG">PNG</option>
-        </select>
-        <br>
-        <br>
-        <input type="submit" value="Convert">
-    </form>
-
-    <div id="result" style="display: none;">
-        <h2>Conversion Result</h2>
-        <p id="input_image_display">Input Image: </p>
-        <p id="output_image_display">Output Image: </p>
-        <a href="/">Go back</a>
-    </div>
-</div>
+</body>
 
 {% endblock %}
