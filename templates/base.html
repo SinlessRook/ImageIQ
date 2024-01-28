@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
+    html{
+      scroll-behavior: smooth;
+    }
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -48,7 +51,7 @@ color: rgba(0, 0, 0, 0.69);
       background-color: #333;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
       z-index: 1;
-      left: -110%;
+      left: -350%;
     }
 
     .dropdown_base:hover .dropdown-content_base {
@@ -56,13 +59,15 @@ color: rgba(0, 0, 0, 0.69);
     }
 
     .dropdown-item_base {
+      width:max-content;
       padding: 12px;
       display: block;
       color: #fff;
       text-decoration: none;
+      text-align: center;
     }
         .dropdown-item_base:hover {
-      background-color: #ddd;
+      background-color: #8778782e;
     }
 
     .dropdown_base:hover{
@@ -70,8 +75,10 @@ color: rgba(0, 0, 0, 0.69);
       animation: fadeIn 0.3s ease-in-out;
     }
     .dropdown-content_base{
+      text-align: center;
+      width:max-content;
       animation: fadeIn 0.3s ease-in-out;
-      left:-110%;
+      left:-350%;
     }
     @keyframes fadeIn {
       from {
@@ -94,9 +101,12 @@ color: rgba(0, 0, 0, 0.69);
   <div class="dropdown_base">
     <span><i class="fa fa-bars" style="font-size:48px; color: #87847C;"></i></span>
     <div class="dropdown-content_base">
-      <a href="#" class="dropdown-item_base">Option 1</a>
-      <a href="#" class="dropdown-item_base">Option 2</a>
-      <a href="#" class="dropdown-item_base">Option 3</a>
+      <a href="{{url_for('home')}}" class="dropdown-item_base">Home</a>
+      <a href="{{url_for('pdf')}}" class="dropdown-item_base">Edit Pdf</a>
+      <a href="{{url_for('format')}}" class="dropdown-item_base">Change format of image</a>
+      <a href="{{url_for('extract')}}" class="dropdown-item_base">Extract data from pdf</a>
+      <a href="{{url_for('chat')}}" class="dropdown-item_base">Chatbot</a>
+      <a href="{{url_for('help')}}" class="dropdown-item_base">Help Menu</a>
     </div>
   </div>
 </nav>

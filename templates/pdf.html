@@ -115,10 +115,11 @@ body {
 
 .horizontal-centre{
   display: flex;
+  width: fit-content;
   border: solid #391F5B;
   margin: 0;
   left: 50%;
-  position: absolute;
+  position: relative;
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
   margin-bottom: 2em;
@@ -170,39 +171,24 @@ input[type="file"]::file-selector-button:active {
 <div class="container">
     <h1>Your PDF editing companion</h1>
     <p>Edit pdf file for free.</p>
-    <form action="\upload" method="POST" enctype="multipart/form-data" >
-      <div class="horizontal-centre">
-    <input type="file" id="pdf_file" name="file" accept=".pdf"  required multiple>
-    
-    <button type="submit" class="button-72"><i class="fa fa-upload" ></i></button>
-    </div>
-      <!-- <script>
-      let input = document.getElementById("inputTag");
-      let imageName = document.getElementById("imageName")
-
-      input.addEventListener("change", ()=>{
-          let inputImage = document.querySelector("input[type=file]").files[0];
-          imageName.innerText = inputImage.name;
-
-          
-      })
-    </script> -->
-    </form>
+    <button onclick="window.location.href='#continue'" type="submit" class="button-72" style=" border-radius: 50px; -ms-transform: translateX(-50%);transform: translateX(-50%);left: 50%;position: relative;">
+      &nbsp;&nbsp;&nbsp;CONTINUE&nbsp;&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-right" style="font-size: 48px;" ></i></button>
     <br>
     <p>Your files stays private. We respect your privacy and delete the files within 1 hour</p>
     <h2>What can I do with ImageIQ (pdf files)</h2>
     <ol>
-      <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Split PDF</li>
+      <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li id="continue">Split PDF</li>
         <button class="button-71" onclick="expand('split')"><i class="fa fa-check-square" id="user_button_for_split"></i></button>
       </div>
     <div id="collapse_window_for_split" style="display: none;">
         <h2>PDF Splitter</h2>
-        <form action="split_pdf.py" method="post">
-            <label for="startPage">Start Page:</label>
-            <input type="number" id="startPage" name="startPage" required>
-            <label for="endPage">End Page:</label>
-            <input type="number" id="endPage" name="endPage" required>
-            <button type="submit">Split PDF</button>
+        <form action="split_pdf" method="post" enctype="multipart/form-data">
+        <label for="startPage">Number range:</label>
+        <input id="startPage" name="startPage" required>
+        <div class="horizontal-centre" style="margin-top: 2rem;">
+          <input type="file" id="pdf_file" name="file" accept=".pdf"  required >
+          <button type="submit" class="button-72"><i class="fa fa-upload" ></i></button>
+        </div>
         </form>
         <br>
       </div>
@@ -211,20 +197,25 @@ input[type="file"]::file-selector-button:active {
     </div>
     <div id="collapse_window_for_merge" style="display: none;">
       <h2>Merged pdf</h2>
+      <form action="merge_pdf" method="post" enctype="multipart/form-data">
+      <div class="horizontal-centre" style="margin-top: 2rem;">
+        <input type="file" id="pdf_file" name="file" accept=".pdf"  required multiple>
+        <button type="submit" class="button-72"><i class="fa fa-upload" ></i></button>
+      </div>
+    </form>
     </div>
     <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>ENCRYPT PDF</li>
       <button class="button-71" onclick="expand('encrypt')"><i class="fa fa-check-square" id="user_button_for_encrypt"></i></button>
     </div>
     <div id="collapse_window_for_encrypt" style="display: none;">
       <h2>PDF Encryptor</h2>
-    <form action="encrypt_pdf.py" method="post" enctype="multipart/form-data">
-        <label for="pdfFile">Select PDF File:</label>
-        <input type="file" id="pdfFile" name="pdfFile" accept=".pdf" required>
-
+    <form action="encrypt_pdf" method="post" enctype="multipart/form-data">
         <label for="password">Enter Password:</label>
         <input type="password" id="password" name="password" required>
-
-        <button type="submit">Encrypt PDF</button>
+        <div class="horizontal-centre" style="margin-top: 2rem;">
+          <input type="file" id="pdf_file" name="file" accept=".pdf"  required >
+          <button type="submit" class="button-72"><i class="fa fa-upload" ></i></button>
+        </div>
     </form>
     </div>
 

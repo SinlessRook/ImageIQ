@@ -1,43 +1,41 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request,send_from_directory,flash,redirect
 from PIL import Image
 from io import BytesIO
 import base64
 from werkzeug.utils import secure_filename
+from apscheduler.schedulers.background import BackgroundScheduler
 import os
-import pypdf
+from datetime import datetime, timedelta
+import main
 
 app = Flask(__name__)
+UPLOAD_FOLDER='uploads'
+OUTPUT_FOLDER='output'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+
+
+scheduler = BackgroundScheduler()
+scheduler.start()
+
+def delete_old_files():
+    # Function to delete files older than 1 hour in both upload and output folders
+    for folder in [UPLOAD_FOLDER, OUTPUT_FOLDER]:
+        for file_name in os.listdir(folder):
+            file_path = os.path.join(folder, file_name)
+            file_time = datetime.fromtimestamp(os.path.getctime(file_path))
+            if datetime.now() - file_time > timedelta(hours=1):
+                os.remove(file_path)
+            os.remove(file_path)
+
+# Schedule the task to run every hour
+scheduler.add_job(delete_old_files, 'interval', hours=1)
 @app.route('/')
 def index():
     return render_template('index.html')
-
-# @app.route('/', methods=['POST'])
-# def upload():
-#     if 'file' not in request.files:
-#         return "No file part"
-    
-#     file = request.files['file']
-    
-#     if file.filename == '':
-#         return "No selected file"
-    
-#     if file:
-#         # Perform necessary operations on the image (resizing in this case)
-#         img = Image.open(file)
-#         img = img.rotate(90)  # Resize the image to 300x300 pixels
-        
-#         # Save the modified image to a BytesIO object
-#         output_buffer = BytesIO()
-#         img.save(output_buffer, format='PNG')
-#         output_buffer.seek(0)
-        
-#         # Convert the BytesIO object to a base64-encoded string
-#         output_data = output_buffer.getvalue()
-#         output_base64 = base64.b64encode(output_data).decode('utf-8')
-        
-#         # Return the modified image data as a base64-encoded string
-#         return render_template('index.html', img_data=output_base64)
 
 @app.route('/home')
 def home():
@@ -66,24 +64,60 @@ def chat():
 @app.route('/help')
 def help():
     return render_template('help.html')
-
-@app.route("/upload", methods=['POST', 'GET'])
-def edit_pdf():
+@app.route('/merge_pdf', methods=['POST'])
+def merge_pdf():
+    delete_old_files()
     if 'file' not in request.files:
-        return "no file part"
+        return flash("No file part")
 
-    file = request.files['file']
+    pdf_file = request.files.getlist('file')
+    file_path=[]
+    for i in pdf_file:
+        if i.filename == '':
+            return flash("No selected file")
+        filename = secure_filename(i.filename)
+        uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        i.save(uploaded_file_path)
+        file_path.append(uploaded_file_path)
+    output_file_path = os.path.join(app.config['OUTPUT_FOLDER'], 'merged_pdf.pdf')
+    main.merge_pdfs(file_path, output_file_path)
+    return send_from_directory(app.config["OUTPUT_FOLDER"], 'merged_pdf.pdf', as_attachment=True,download_name="ImageIQ_Merged.pdf")
 
-    if file.filename == '':
-        return "no selected file"
+@app.route('/split_pdf', methods=['POST'])
+def split():
+    delete_old_files()
+    if 'file' not in request.files:
+        return ("No file part")
 
-    if file:
-        file=request.files['file']
-        try:
-            return render_template('view_pdf.html',file_data=file)
-        except Exception as e:
-            return str(e)
-        
+    pdf_file = request.files.getlist('file')
+    range=request.form.get('startPage')
+    for i in pdf_file:
+        if i.filename == '' :
+            return ("No selected file")
+        filename = secure_filename(i.filename)
+        uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        output_file_path = os.path.join(app.config['OUTPUT_FOLDER'], filename)
+        i.save(uploaded_file_path)
+        main.split_pdf(uploaded_file_path, output_file_path,range)
+        return send_from_directory(app.config["OUTPUT_FOLDER"], filename, as_attachment=True,download_name="ImageIQ_splitted.pdf")
+
+@app.route('/encrypt_pdf', methods=['POST'])
+def encrypt():
+    delete_old_files()
+    if 'file' not in request.files:
+        return flash("No file part")
+
+    pdf_file = request.files.getlist('file')
+    psw=request.form.get('password')
+    for i in pdf_file:
+        if i.filename == '' :
+            return flash("No selected file")
+        filename = secure_filename(i.filename)
+        uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        output_file_path = os.path.join(app.config['OUTPUT_FOLDER'], filename)
+        i.save(uploaded_file_path)
+        main.encrypt_pdf(uploaded_file_path, output_file_path,psw)
+        return send_from_directory(app.config["OUTPUT_FOLDER"], filename, as_attachment=True,download_name="ImageIQ_encrypted.pdf")
     
 
 
