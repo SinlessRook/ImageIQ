@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,send_from_directory,flash,redirect
+from flask import Flask, render_template, request,send_from_directory,flash,jsonify
 from PIL import Image
 from io import BytesIO
 import base64
@@ -119,6 +119,33 @@ def encrypt():
         main.encrypt_pdf(uploaded_file_path, output_file_path,psw)
         return send_from_directory(app.config["OUTPUT_FOLDER"], filename, as_attachment=True,download_name="ImageIQ_encrypted.pdf")
     
+@app.route('/convert_image', methods=['POST'])
+def convert_image_route():
+    if 'input_image' not in request.files:
+        return jsonify({'error': 'No file part'})
+
+    input_image = request.files['input_image']
+    output_format = request.form['output_format']
+
+    if input_image.filename == '':
+        return jsonify({'error': 'No selected file'})
+
+    if input_image:
+        input_path = os.path.join(app.config['UPLOAD_FOLDER'], input_image.filename)
+        output_path = os.path.join(app.config['OUTPUT_FOLDER'], f'converted_{input_image.filename}')
+
+        input_image.save(input_path)
+
+        converted_path = main.convert_image(input_path, output_path, output_format)
+
+        # Clean up: remove the uploaded image after conversion
+        os.remove(input_path)
+
+        return jsonify({
+            'input_path': input_path,
+            'output_path': converted_path
+        })
+
 
 
 if __name__ == '__main__':

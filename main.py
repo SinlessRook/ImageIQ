@@ -1,5 +1,6 @@
 from pypdf import PdfReader, PdfWriter
 import os
+from PIL import Image
 
 
 def merge_pdfs(input_paths, output_path):
@@ -38,3 +39,8 @@ def encrypt_pdf(input_path, output_path, password):
         new_file.write(f)
     os.remove(input_path)
     
+def convert_image(input_path, output_path, output_format):
+    image = Image.open(input_path)
+    image = image.convert("RGB")
+    image.save(output_path, format=output_format)
+    return output_path
