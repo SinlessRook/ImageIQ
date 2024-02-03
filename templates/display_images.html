@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extracted Images</title>
+</head>
+<body>
+    <h1>Extracted Images</h1> <!-- Display a heading for the page -->
+    {% for image in images %} <!-- Loop through each image in the images list -->
+        <img src="{{ url_for('serve_image', path=image) }}" alt="Extracted image">
+    {% endfor %}
+</body>
+</html>
