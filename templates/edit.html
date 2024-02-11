@@ -1,214 +1,82 @@
 {% extends "base.html" %} {% block head %}{{super()}}
 {% endblock %}
 {% block content %}
-<style>
-    body {
-  background-image: url(https://static.vecteezy.com/system/resources/thumbnails/008/023/852/small/abstract-colorful-geometric-shape-background-modern-color-background-for-your-website-vector.jpg);
-  background-size: cover;
-}
-h1 {
-  color: blanchedalmond;
-  text-align: center;
-
-  animation-name: example;
-  animation-duration: 4s;
-  animation-iteration-count: infinite;
-}
-@keyframes example {
-  0% {
-    background-color: red;
-  }
-  25% {
-    background-color: yellow;
-  }
-  50% {
-    background-color: blue;
-  }
-  100% {
-    background-color: green;
-  }
-}
-
-.ok1 {
-  text-align: center;
-  color: beige;
-}
-.ok2 {
-  color: beige;
-}
-.ok3 {
-  text-align: center;
-  color: beige;
-}
-.ok4
-{
-  color: beige;
-  text-align: center;
-}
-button {
-  align-items: center;
-}
-.no
-{
-   text-align:center;
-}
-.no1
-{
-  text-align:center;
-  margin-left: 110;
-}
-.ok {
-  top: 50;
-  right: 50;
-  align-items: center;
-
-  width: 300px;
-  height: 200px;
-  padding-top: 100px;
-}
-#button {
-  font-size: 25px;
-}
-.if {
-  top: 50;
-  right: 50;
-  text-align: center;
-  align-items: self-start;
-
-  width: 300px;
-  height: 200px;
-  padding-top: 50px;
-}
-#button {
-  font-size: 25px;
-}
-/* Dropdown Button */
-.dropbtn {
-  background-color: white;
-  color: black;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: initial;
-  display: inline-block;
-  top: 0;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-  background-color: #3e8e41;
-}
-.for {
-  top: 50;
-  right: 50;
-  text-align: center;
-  align-items: self-start;
-
-  width: 300px;
-  height: 200px;
-  padding-top: 200px;
-}
-/* Style buttons */
-.btn {
-  background-color: DodgerBlue;
-  border: none;
-  color: white;
-  padding: 12px 30px;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-/* Darker background on mouse-over */
-.btn:hover {
-  background-color: RoyalBlue;
-}
-</style>
-<h1> Hello everybody welcome
-</h1>
-<h2 class="ok4">Here we have options for uploading the document,editting the document and for downloading the saved document</h2>
-<div class="ok">
- <h2 class="ok1"> for Uploading image </h2>
-
- <!DOCTYPE html>
- <html>
- <body>
- 
-
- 
- <form action="/action_page.php">
-  <div class="no1">
-   <input type="file" id="myFile" name="filename">
-  </div>
-   <div class="no">
-   <input type="submit">
-  </div>
- </form>
- 
- </body>
- </html>
-</div>
-
-<div class="if">
-<h2 class="ok2">for editting the image</h2>
-<!-- Add icon library -->
-
-    <div class="dropdown">
-        <button class="dropbtn">Edit Options</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/edit_style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Editor</title>
+</head>
+<title> IMAGE EDITIONS</title>
+    <h2 class="ok4">
+      Here we have Options for uploading the document, editing the document, and
+      for downloading the modified document
+    </h2>
+    <div class="ok">
+      <h2 class="ok1">Upload Image</h2>
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        
+        <div class="file-upload-tab">
+          <label for="file-input" class="tab-label">Choose File</label>
+          <input type="file" id="file-input" class="file-input">
+          <button class="upload-button">Upload</button>
+        </div>
+      </form>
+    </div>
+    <div class="if">
+      <h2 class="ok2">Edit Image</h2>
+      <div class="dropdown">
+        <button class="edit-options-button">Edit Options</button>
         <div class="dropdown-content">
-          <div>
-          <button style='font-size:22px'>Rotate </button>
-        </div>
-        <div>
-          <button style='font-size:22px'>For adjusting the brightness </button>
-        </div>
-        <div>
-          <button style='font-size:22px'>Resizing the image></button>
-        </div>
-        <div>
-          <button style='font-size:22px'>Croping  the image</button>
-        </div>
-        <div>
-          <button style='font-size:22px'>For adding text to images</button>
-        </div>
+          <div class="dropdown">
+            <div>
+              <button class="rotate-btn" style="font-size: 22px">Rotate</button>
+              <script>
+                document
+                  .querySelector(".rotate-btn")
+                  .addEventListener("click", function () {
+                    var angle = prompt("Enter the angle to rotate the image:");
+                    if (angle !== null) {
+                      var img = document.querySelector("img");
+                      img.style.transform = "rotate(" + angle + "deg)";
+                    }
+                  });
+              </script>
+            </div>
+            <div>
+              <button style="font-size: 22px">
+                For adjusting the brightness
+              </button>
+            </div>
+            <div>
+              <button style="font-size: 22px">Resizing the image</button>
+            </div>
+            <div>
+              <button style="font-size: 22px">Croping the image</button>
+            </div>
+            
+          </div>
         </div>
       </div>
-<div class="for">
-    <h2 class="ok3">For the downloading the saved the document </h2>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<!-- Auto width -->
-<button class="btn"><i class="fa fa-download"></i> Download</button>    
-</div>
+    </div>
+    
+    <div class="for">
+      <h2 class="ok3">Download modified document</h2>
+      <form action="/download" method="post">
+        <button class="btn"><i class="fa fa-download"></i> Download</button>
+      </form>
+    </div>
+  </body>
+</html>
+<script>
+    document.getElementById("rotate-btn").addEventListener("click", function() {
+    var angle = prompt("Enter rotation angle:");
+    if (angle !== null) {
+      var img = document.getElementById("image");
+      img.style.transform = "rotate(" + angle + "deg)";
+    }
+  });
+</script>
 {% endblock %}
