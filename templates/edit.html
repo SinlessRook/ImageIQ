@@ -1,231 +1,21 @@
 {% extends "base.html" %} {% block head %}{{super()}}
 {% endblock %}
 {% block content %}
-<style>
-   body {
-  background-image: url(https://img.freepik.com/free-vector/dark-low-poly-background_1048-7971.jpg?w=900&t=st=1707545863~exp=1707546463~hmac=5c1673a89b712d512420fe424200d4a50096413ce5b77754e9007dba82bb0f79);
-  background-size: cover;
-}
-h1 {
-  color: blanchedalmond;
-  text-align: center;
-
-  
-}
-
-.edit-options-button {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.edit-options-button:hover {
-  background-color: #3e8e41;
-  animation: pulse 1s ease-in-out infinite;
-}
-@keyframes pulse {
-  0% {
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  }
-  50% {
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
-  }
-  100% {
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  }
-}
-
-
-.file-upload-tab {
-  position: relative;
-  background-color: #333;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.tab-label {
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.file-input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.upload-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-@keyframes example {
-  0% {
-    background-color: red;
-  }
-  25% {
-    background-color: yellow;
-  }
-  50% {
-    background-color: blue;
-  }
-  100% {
-    background-color: green;
-  }
-}
-
-.ok1 {
-  text-align: center;
-  color: beige;
-}
-.ok2 {
-  color: beige;
-}
-.ok3 {
-  text-align: center;
-  color: beige;
-}
-.ok4
-{
-  padding-top:15PX;
-  color: beige;
-  text-align: center;
-}
-button {
-  align-items: center;
-}
-.no
-{
-   text-align:center;
-}
-.no1
-{
-  text-align:center;
-  margin-left: 110;
-}
-.ok {
-  top: 50;
-  right: 50;
-  align-items: center;
-
-  width: 300px;
-  height: 200px;
-  padding-top: 100px;
-}
-#button {
-  font-size: 25px;
-}
-.if {
-  top: 50;
-  right: 50;
-  text-align: center;
-  align-items: self-start;
-
-  width: 300px;
-  height: 200px;
-  padding-top: 5px;
-}
-#button {
-  font-size: 25px;
-}
-/* Dropdown Button */
-.dropbtn {
-  background-color: white;
-  color: black;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: initial;
-  display: inline-block;
-  top: 0;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-  background-color: #3e8e41;
-}
-.for {
-  top: 50;
-  right: 50;
-  text-align: center;
-  align-items: self-start;
-
-  width: 300px;
-  height: 200px;
-  padding-top: 20px;
-}
-/* Style buttons */
-.btn {
-  background-color: DodgerBlue;
-  border: none;
-  color: white;
-  padding: 12px 30px;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-/* Darker background on mouse-over */
-.btn:hover {
-  background-color: RoyalBlue;
-}
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/edit_style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Editor</title>
+</head>
 <title> IMAGE EDITIONS</title>
-    
     <h2 class="ok4">
       Here we have Options for uploading the document, editing the document, and
       for downloading the modified document
     </h2>
     <div class="ok">
-      <h2 class="ok1">for Uploading image</h2>
+      <h2 class="ok1">Upload Image</h2>
       <form action="/upload" method="post" enctype="multipart/form-data">
         
         <div class="file-upload-tab">
@@ -236,7 +26,7 @@ button {
       </form>
     </div>
     <div class="if">
-      <h2 class="ok2">for Editing the image</h2>
+      <h2 class="ok2">Edit Image</h2>
       <div class="dropdown">
         <button class="edit-options-button">Edit Options</button>
         <div class="dropdown-content">
@@ -257,7 +47,7 @@ button {
             </div>
             <div>
               <button style="font-size: 22px">
-                For Adjusting the brightness
+                For adjusting the brightness
               </button>
             </div>
             <div>
@@ -272,9 +62,8 @@ button {
       </div>
     </div>
     
-    
     <div class="for">
-      <h2 class="ok3">For Downloading the saved document</h2>
+      <h2 class="ok3">Download modified document</h2>
       <form action="/download" method="post">
         <button class="btn"><i class="fa fa-download"></i> Download</button>
       </form>
