@@ -146,7 +146,5 @@ def convert_image_route():
             'output_path': converted_path
         })
 
-
-
 if __name__ == '__main__':
     app.run(debug=True)

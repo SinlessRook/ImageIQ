@@ -4,7 +4,9 @@
 <style>
 body {
     font-family: Arial, sans-serif;
-   }
+    background-image: url("./static/assets/background_PDF.png");
+    background-size: cover;
+  }
    
    .container {
     width: 80%;
@@ -101,7 +103,7 @@ body {
   touch-action: manipulation;
   vertical-align: baseline;
 }
-.button-72:hover,.button-71:hover {
+.button-72:hover,.button-71:hover{
   background-image: linear-gradient(#B384C9, #391F5B 50%);
 }
 
@@ -165,8 +167,28 @@ input[type="file"]::file-selector-button:active {
   text-align: center;
 }
 
+label {
+  margin-bottom: 0.5rem;
+}
+
+label:after { content: ": " }
 
 
+input[type="text"]{
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.button_text{
+  transition: 10ms;
+  scale:0.8;
+  behavior: "smooth";
+  transform: translateX(10%);
+}
 </style>
 <div class="container">
     <h1>Your PDF editing companion</h1>
@@ -186,8 +208,10 @@ input[type="file"]::file-selector-button:active {
         <label for="startPage">Number range:</label>
         <input id="startPage" name="startPage" required>
         <div class="horizontal-centre" style="margin-top: 2rem;">
-          <input type="file" id="pdf_file" name="file" accept=".pdf"  required >
-          <button type="submit" class="button-72"><i class="fa fa-upload" ></i></button>
+          <input type="file" id="pdf_file" name="file" accept=".pdf" oninput="show_pdf()"  required>
+          <button type="submit" class="button-72" onmouseover="show_submit_button()" 
+          onmouseout="hide_submit_button()"><i class="fa fa-upload" ></i><span class="button_text" 
+          style="display: none;">&nbsp;&nbsp;UPLOAD</span></button>
         </div>
         </form>
         <br>
@@ -210,7 +234,7 @@ input[type="file"]::file-selector-button:active {
     <div id="collapse_window_for_encrypt" style="display: none;">
       <h2>PDF Encryptor</h2>
     <form action="encrypt_pdf" method="post" enctype="multipart/form-data">
-        <label for="password">Enter Password:</label>
+        <label for="password">Enter Password</label>
         <input type="password" id="password" name="password" required>
         <div class="horizontal-centre" style="margin-top: 2rem;">
           <input type="file" id="pdf_file" name="file" accept=".pdf"  required >
@@ -224,11 +248,11 @@ input[type="file"]::file-selector-button:active {
   <div id="collapse_window_for_rotate" style="display: none;">
       <h2>PDF Rotator</h2>
       <form action="split_pdf" method="post" enctype="multipart/form-data" style="align-items: center;">
-      <label for="startPage">Number range:</label>
+      <label for="startPage">Number range</label>
       <input id="startPage" name="startPage" required>
       <br>
       <br>
-      <label for="angle">Angle:</label>
+      <label for="angle">Angle</label>
       <input type="number" id="angle" name="angle" required>
       <div class="horizontal-centre" style="margin-top: 2rem;">
         <input type="file" id="pdf_file" name="file" accept=".pdf"  required >
@@ -243,7 +267,7 @@ input[type="file"]::file-selector-button:active {
   <div id="collapse_window_for_compress" style="display: none;">
       <h2>PDF Compressor</h2>
       <form action="split_pdf" method="post" enctype="multipart/form-data">
-      <label for="startPage">Number range:</label>
+      <label for="startPage">Number range</label>
       <input id="startPage" name="startPage" required>
       <div class="horizontal-centre" style="margin-top: 2rem;">
         <input type="file" id="pdf_file" name="file" accept=".pdf"  required >
@@ -275,6 +299,7 @@ input[type="file"]::file-selector-button:active {
         document.getElementById("user_button_for_"+option).className="fa fa-check-square";
         }else{
         document.getElementById("collapse_window_for_"+option).style.display = "block";
+        document.getElementById("collapse_window_for_"+option).scrollIntoView({behavior:"smooth"});
         document.getElementById("user_button_for_"+option).className="fa fa-times";}
         collapse_except(option)
       }
@@ -286,6 +311,12 @@ input[type="file"]::file-selector-button:active {
           }
         }
       }
+    function show_submit_button(){
+      document.getElementsByClassName("button_text")[0].style.display = "block";
+    }
+    function hide_submit_button(){
+      document.getElementsByClassName("button_text")[0].style.display = "none";
+    }
     </script>
     <br>
 {% endblock %}

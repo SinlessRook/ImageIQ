@@ -1,0 +1,99 @@
+{% extends "base.html" %} {% block head %}{{super()}}
+{% endblock %}
+{% block content %}
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image:url("./static/assets/meclab_background_help.jpg");
+        background-size: cover;
+        background-position: center;
+    }
+    
+    header {
+        background-color: rgba(255, 255, 255, 0.5);
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        padding: 20px;
+    }
+    
+    main {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+    }
+    
+    section {
+        padding: 20px;
+        border-radius: 20px;
+        background-color: rgba(255, 255, 255, 0.5);
+        margin: 20px;
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    h2 {
+        color: #000000;
+    }
+    
+    .image-item {
+        margin: 20px;
+    }
+    
+    .image_for_page {
+        height: 200px;
+        border: 1px solid #303030;
+        border-radius: 5px;
+    }
+    
+    p {
+        margin: 10px;
+    }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Help Center</h1>
+        </header>
+        <main>
+            <section id="image-section">
+                <h2>Help Page For ImageIQ</h2>
+                <div class="image-item">
+                    <img class="image_for_page" src="static\assets\pdf.png" alt="Image 1">
+                    <p>
+                        <h2>PDF Editor:</h2>
+    The PDF Editor feature in ImageIQ empowers users to seamlessly modify and annotate PDF documents. Whether it's adding text, highlighting important sections, or inserting images, the PDF Editor provides a user-friendly interface for efficient and precise customization of PDF files. Simplify document management by utilizing ImageIQ's PDF Editor to streamline your workflow and enhance collaboration.
+                    </p>
+                </div>
+                <div class="image-item">
+                    <img class="image_for_page" src="static\assets\convert.png" alt="Image 2">
+                    <p>
+                        <h2>Image Format Converter:</h2>
+    With ImageIQ's Image Format Converter, effortlessly transform images between various formats. This versatile tool supports conversion from popular formats like JPEG, PNG and more, ensuring compatibility across platforms and applications. Seamlessly switch between image formats to meet specific requirements, optimize file sizes, or enhance compatibility, making image management a breeze with ImageIQ.
+    
+                    </p>
+                </div>
+                <div class="image-item">
+                    <img class="image_for_page" src="static\assets\edit.png" alt="Image 3">
+                    <p>
+                        <h2>Image Editor:</h2>
+    Unlock your creative potential with ImageIQ's robust Image Editor. This feature provides a comprehensive suite of tools to enhance and customize your images. From basic adjustments such as cropping and resizing to advanced filters, effects, and text overlays, the Image Editor empowers users to transform their visuals effortlessly. Elevate your images to the next level, whether for personal projects or professional presentations, using the intuitive and powerful Image Editor in ImageIQ.</p>
+                </div>
+                <div class="image-item">
+                    <img class="image_for_page" src="static\assets\extract.png" alt="Image 4">
+                    <p>
+                        <h2>PDF Text and image Extractor:</h2>
+    Simplify content extraction from PDF documents with ImageIQ's PDF Text Extractor. This powerful tool allows users to efficiently extract text from PDF files, making it easy to repurpose, analyze, or edit textual content. Enhance productivity by quickly obtaining the text you need without the hassle, making ImageIQ the go-to solution for managing and manipulating PDF content.
+                    </p>
+                </div>
+                <div class="image-item">
+                    <img class="image_for_page" src="static\assets\chatbot.png" alt="Image 5">
+                    <p>
+                        <h2>Image Extractor:</h2>
+    ImageIQ's Image Extractor simplifies the process of extracting images from various documents. Whether it's pulling images from PDFs or other file formats, this feature streamlines the extraction process, providing users with standalone image files. Efficiently collect and repurpose visuals for your projects using ImageIQ's Image Extractor, making image management a seamless experience.</p>
+                </div>
+            </section>
+        </main>
+{% endblock %}
