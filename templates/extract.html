@@ -5,40 +5,54 @@
 body {
     background-image: url("../static/assets/extract_bg.jpg");
     background-size:cover;
-        /* margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh; */
   }
 
 h1{color: beige;}</style>
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Text Extractor</title>
-</head>
-<body>
-    <div class="container">
-    <h1>PDF Text Extractor</h1>
-    
-    <form method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".pdf" required>
-        <button type="submit">Extract Text</button>
-    </form>
-    </div>
-    {% if extracted_text %}
-        <h2>Extracted Text:</h2>
-        <pre>{{ extracted_text }}</pre>
-    {% endif %}
-
-    {% if error %}
-        <p style="color: red;">{{ error }}</p>
-    {% endif %}
-</body>
-</html>
-
-{% endblock %}
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <link rel="stylesheet" href="../static/extract_style.css">
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Extractor</title>
+ </head>
+ <body>
+     <h1>IMAGES AND TEXT EXTRACTOR</h1>
+     <p>Select and submit the PDF file in which you want to extract images or text.</p>
+     <div class="container">
+         <form action="/extract_img" method="POST" enctype="multipart/form-data">
+             <input type="file" name="file" accept=".pdf" required>
+             <label for="images_per_page">Images per page:</label>
+             <input type="number" name="images_per_page" id="images_per_page" min="1" value="1">
+             <input type="hidden" name="extract_opt">
+         <div class="buttons">
+             <button type="submit" onclick="extract('image')">Extract Images</button>
+             <button type="submit" onclick="extract('text')">Extract Text</button>
+         </form>
+         </div>
+     </div>    
+     {% if extracted_text %}
+     <div class="extracted-text">
+         <h2>Extracted Text:</h2>
+         <pre>{{ extracted_text }}</pre>
+     {% endif %}
+ 
+     {% if error %}
+         <p style="color: red;">{{ error }}</p>
+     </div>
+     {% endif %}
+     
+     <script>
+         function extract(command) {
+             if (command=="text"){
+                 document.getElementsByName("extract_opt")[0].value = "text";
+                 document.getElementById("extract_form").submit();
+             }else{
+                 document.getElementsByName("extract_opt")[0].value = "image";
+                 document.getElementById("extract_form").submit();
+             }
+         }
+     </script>
+ </body>
+ </html>
+ {% endblock %}

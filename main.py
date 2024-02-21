@@ -1,6 +1,7 @@
-from pypdf import PdfReader, PdfWriter
+from pypdf import PdfReader, PdfWriter,Transformation
 import os
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
+from reportlab.pdfgen import canvas
 
 
 def merge_pdfs(input_paths, output_path):
@@ -38,9 +39,59 @@ def encrypt_pdf(input_path, output_path, password):
     with open(output_path, 'wb') as f:
         new_file.write(f)
     os.remove(input_path)
+
+def rotate_pdf(input_path, output_path, rotation_angle,pg_range):
+    with open(input_path, 'rb') as file:
+        pdf_reader = PdfReader(input_path)
+        pdf_writer = PdfWriter()
+        for page_num in range(len(pdf_reader.pages)):
+            page = pdf_reader.pages[page_num].rotate(int(rotation_angle))
+            pdf_writer.add_page(page)
+
+        with open(output_path, 'wb') as output_file:
+            pdf_writer.write(output_file)
+def compress_pdf(input_path, output_path):
+    pdf_writer = PdfWriter()
+    
+    # Open the input PDF file
+    with open(input_path, 'rb') as input_file:
+        pdf_reader = pdf_reader(input_file)
+        
+        # Add each page to the writer object
+        for page_number in range(pdf_reader.numPages):
+            page = pdf_reader.getPage(page_number)
+            pdf_writer.addPage(page)
+            
+        # Create a canvas object to set compression options
+        temp_output = open(output_path, 'wb')
+        c = canvas.Canvas(temp_output)
+        c.setCompression(PyPDF2.generic.BooleanObject(True))  # Enable compression
+        c.save()
+        temp_output.close()
+        
+        # Write the compressed PDF content to the output file
+        with open(output_path, 'wb') as output_file:
+            pdf_writer.write(output_file)
+def watermark_pdf(input_path, output_path, watermark_path):
+    stamp = PdfReader(watermark_path).pages[0]
+    writer = PdfWriter(clone_from=input_path)
+    for page in writer.pages:
+        page.merge_page(stamp, over=False)  # here set to False for watermarking
+
+    writer.write(output_path)
     
 def convert_image(input_path, output_path, output_format):
     image = Image.open(input_path)
     image = image.convert("RGB")
     image.save(output_path, format=output_format)
     return output_path
+
+
+def generate_image(text):
+    img = Image.new('RGB', (400, 200), color = (255, 255, 255))
+    d = ImageDraw.Draw(img)
+    font = ImageFont.truetype("arial.ttf", 20)
+    d.text((10,10), text, fill=(0,0,0), font=font)
+    img_path = "static/generated_image.png"
+    img.save(img_path)
+    return img_path

@@ -220,7 +220,7 @@ input[type="text"]{
       <button class="button-71" onclick="expand('merge')"><i class="fa fa-check-square" id="user_button_for_merge"></i></button>
     </div>
     <div id="collapse_window_for_merge" style="display: none;">
-      <h2>Merged pdf</h2>
+      <h2>PDF merger</h2>
       <form action="merge_pdf" method="post" enctype="multipart/form-data">
       <div class="horizontal-centre" style="margin-top: 2rem;">
         <input type="file" id="pdf_file" name="file" accept=".pdf"  required multiple>
@@ -247,13 +247,13 @@ input[type="text"]{
     </div>
   <div id="collapse_window_for_rotate" style="display: none;">
       <h2>PDF Rotator</h2>
-      <form action="split_pdf" method="post" enctype="multipart/form-data" style="align-items: center;">
+      <form action="rotate_pdf" method="post" enctype="multipart/form-data" style="align-items: center;">
       <label for="startPage">Number range</label>
       <input id="startPage" name="startPage" required>
       <br>
       <br>
       <label for="angle">Angle</label>
-      <input type="number" id="angle" name="angle" required>
+      <input type="number" id="angle" name="angle" step="90" required>
       <div class="horizontal-centre" style="margin-top: 2rem;">
         <input type="file" id="pdf_file" name="file" accept=".pdf"  required >
         <button type="submit" class="button-72"><i class="fa fa-upload" ></i></button>
