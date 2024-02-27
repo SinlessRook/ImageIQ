@@ -159,13 +159,7 @@ input[type="file"]::file-selector-button:active {
   background-color: #e5e7eb;
 }
 
-.collapse_window_for_split{
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
+
 
 label {
   margin-bottom: 0.5rem;
@@ -189,6 +183,22 @@ input[type="text"]{
   behavior: "smooth";
   transform: translateX(10%);
 }
+
+.container_1,.container_2,.container_3,.container_4,.container_5,.container_6{
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  justify-content: center;
+  margin-top: 30px;
+  margin-left: 30%;
+  box-shadow: #ccc;
+  border: #ccc;
+  transform: translateY(120%);
+  transition: 0.8s;
+}
 </style>
 <div class="container">
     <h1>Your PDF editing companion</h1>
@@ -203,9 +213,10 @@ input[type="text"]{
         <button class="button-71" onclick="expand('split')"><i class="fa fa-check-square" id="user_button_for_split"></i></button>
       </div>
     <div id="collapse_window_for_split" style="display: none;">
+      <div class="container_1">
         <h2>PDF Splitter</h2>
         <form action="split_pdf" method="post" enctype="multipart/form-data">
-        <label for="startPage">Number range:</label>
+        <label for="startPage">Number range</label>
         <input id="startPage" name="startPage" required>
         <div class="horizontal-centre" style="margin-top: 2rem;">
           <input type="file" id="pdf_file" name="file" accept=".pdf" oninput="show_pdf()"  required>
@@ -216,10 +227,12 @@ input[type="text"]{
         </form>
         <br>
       </div>
+    </div>
     <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>Merge PDF</li>
       <button class="button-71" onclick="expand('merge')"><i class="fa fa-check-square" id="user_button_for_merge"></i></button>
     </div>
     <div id="collapse_window_for_merge" style="display: none;">
+      <div class="container_2">
       <h2>PDF merger</h2>
       <form action="merge_pdf" method="post" enctype="multipart/form-data">
       <div class="horizontal-centre" style="margin-top: 2rem;">
@@ -227,11 +240,13 @@ input[type="text"]{
         <button type="submit" class="button-72"><i class="fa fa-upload" ></i></button>
       </div>
     </form>
+  </div>
     </div>
     <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li>ENCRYPT PDF</li>
       <button class="button-71" onclick="expand('encrypt')"><i class="fa fa-check-square" id="user_button_for_encrypt"></i></button>
     </div>
     <div id="collapse_window_for_encrypt" style="display: none;">
+      <div class="container_3">
       <h2>PDF Encryptor</h2>
     <form action="encrypt_pdf" method="post" enctype="multipart/form-data">
         <label for="password">Enter Password</label>
@@ -241,11 +256,13 @@ input[type="text"]{
           <button type="submit" class="button-72"><i class="fa fa-upload" ></i></button>
         </div>
     </form>
+  </div>
     </div>
     <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li id="continue">Rotate PDF</li>
       <button class="button-71" onclick="expand('rotate')"><i class="fa fa-check-square" id="user_button_for_rotate"></i></button>
     </div>
   <div id="collapse_window_for_rotate" style="display: none;">
+      <div class="container_4">
       <h2>PDF Rotator</h2>
       <form action="rotate_pdf" method="post" enctype="multipart/form-data" style="align-items: center;">
       <label for="startPage">Number range</label>
@@ -259,27 +276,31 @@ input[type="text"]{
         <button type="submit" class="button-72"><i class="fa fa-upload" ></i></button>
       </div>
       </form>
+      </div>
       <br>
     </div>
     <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li id="continue">Compress PDF</li>
       <button class="button-71" onclick="expand('compress')"><i class="fa fa-check-square" id="user_button_for_compress"></i></button>
     </div>
   <div id="collapse_window_for_compress" style="display: none;">
+      <div class="container_5">
       <h2>PDF Compressor</h2>
-      <form action="split_pdf" method="post" enctype="multipart/form-data">
-      <label for="startPage">Number range</label>
-      <input id="startPage" name="startPage" required>
+      <form action="compress_pdf" method="post" enctype="multipart/form-data">
+      <label for="compression_level">Compression Level</label>
+      <input type="number" id="compression_level" name="compression_level" step="0.1" required placeholder="Enter the compression level in %" >
       <div class="horizontal-centre" style="margin-top: 2rem;">
         <input type="file" id="pdf_file" name="file" accept=".pdf"  required >
         <button type="submit" class="button-72"><i class="fa fa-upload" ></i></button>
       </div>
       </form>
+      </div>
       <br>
     </div>
     <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li id="continue">Add watermark to PDF</li>
       <button class="button-71" onclick="expand('watermark')"><i class="fa fa-check-square" id="user_button_for_watermark"></i></button>
     </div>
   <div id="collapse_window_for_watermark" style="display: none;">
+      <div class="container_6">
       <h2>Add watermark to PDF</h2>
       <form action="split_pdf" method="post" enctype="multipart/form-data">
       <label for="watermark_file">Watermark File</label>
@@ -289,17 +310,21 @@ input[type="text"]{
         <button type="submit" class="button-72"><i class="fa fa-upload" ></i></button>
       </div>
       </form>
+      </div>
       <br>
     </ol>
     <script>
       List = ["split","merge","encrypt","rotate","compress","watermark"];
       function expand(option){
+        containers_to_right();
         if (document.getElementById("collapse_window_for_"+option).style.display == "block"){
           document.getElementById("collapse_window_for_"+option).style.display = "none";
+          containers_to_left();
         document.getElementById("user_button_for_"+option).className="fa fa-check-square";
         }else{
         document.getElementById("collapse_window_for_"+option).style.display = "block";
         document.getElementById("collapse_window_for_"+option).scrollIntoView({behavior:"smooth"});
+        containers_to_left();
         document.getElementById("user_button_for_"+option).className="fa fa-times";}
         collapse_except(option)
       }
@@ -311,6 +336,18 @@ input[type="text"]{
           }
         }
       }
+    function containers_to_right(){
+      containers=["container_1","container_2","container_3","container_4","container_5","container_6"];
+      for (var i=0;i<containers.length;i++){
+        document.getElementsByClassName(containers[i])[0].style.transform = "translateY(120%)";
+      }
+    }
+    function containers_to_left(){
+      containers=["container_1","container_2","container_3","container_4","container_5","container_6"];
+      for (var i=0;i<containers.length;i++){
+        document.getElementsByClassName(containers[i])[0].style.transform = "translateY(0%)";
+      }
+    }
     function show_submit_button(){
       document.getElementsByClassName("button_text")[0].style.display = "block";
     }
