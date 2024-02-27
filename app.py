@@ -325,7 +325,23 @@ def extract_imgs():
     return render_template('extract.html')
 
 
+@app.route('/edit-upload', methods=['POST'])
+def edit_upload():
+    delete_old_files()
+    if 'file' not in request.files:
+        return flash("No file part")
 
+    img_file = request.files.getlist('file')
+    for i in img_file:
+        if i.filename == '' :
+            return flash("No selected file")
+        filename = secure_filename(i.filename)
+        uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        output_file_path = os.path.join(app.config['OUTPUT_FOLDER'], filename)
+        i.save(uploaded_file_path)
+        return render_template('edit.html')
+        
+    
 @app.route('/convert_image', methods=['POST'])
 def convert_image_route():
     if 'input_image' not in request.files:

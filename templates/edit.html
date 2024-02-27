@@ -220,6 +220,14 @@ h1 {
   .btn:hover {
     background-color: RoyalBlue;
   }  
+
+  .image-container{
+    display: flex;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
 </style>
 <!DOCTYPE html>
 <html lang="en">
@@ -235,15 +243,16 @@ h1 {
     </h2>
     <div class="ok">
       <h2 class="ok1">Upload Image</h2>
-      <form action="/upload" method="post" enctype="multipart/form-data">
+      <form action="/edit-upload" method="post" enctype="multipart/form-data">
         
         <div class="file-upload-tab">
           <label for="file-input" class="tab-label">Choose File</label>
-          <input type="file" id="file-input" class="file-input">
-          <button class="upload-button">Upload</button>
+          <input type="file" id="file-input" class="file-input" name="file" multiple="false" .required>
+          <button type="submit" class="upload-button " onclick="upload_successful()">Upload</button>
         </div>
       </form>
     </div>
+    <img src="./static/assets/byte-bandits-high-resolution-logo-white.png" alt="Heel">
     <div class="if">
       <h2 class="ok2">Edit Image</h2>
       <div class="dropdown">
@@ -290,12 +299,8 @@ h1 {
   </body>
 </html>
 <script>
-    document.getElementById("rotate-btn").addEventListener("click", function() {
-    var angle = prompt("Enter rotation angle:");
-    if (angle !== null) {
-      var img = document.getElementById("image");
-      img.style.transform = "rotate(" + angle + "deg)";
-    }
-  });
+ function upload_successful(){
+   alert("Upload Successful");
+ }
 </script>
 {% endblock %}
