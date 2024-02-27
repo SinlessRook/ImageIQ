@@ -123,6 +123,7 @@ def encrypt():
         output_file_path = os.path.join(app.config['OUTPUT_FOLDER'], filename)
         i.save(uploaded_file_path)
         main.encrypt_pdf(uploaded_file_path, output_file_path,psw)
+        encrypted_pdf=output_file_path
         return send_from_directory(app.config["OUTPUT_FOLDER"], filename, as_attachment=True,download_name="ImageIQ_encrypted.pdf")
 @app.route('/rotate_pdf', methods=['POST'])
 def rotate():
@@ -142,6 +143,27 @@ def rotate():
         i.save(uploaded_file_path)
         main.rotate_pdf(uploaded_file_path, output_file_path,angle,pg_range)
         return send_from_directory(app.config["OUTPUT_FOLDER"], filename, as_attachment=True,download_name="ImageIQ_rotated.pdf")
+
+@app.route('/compress_pdf', methods=['POST'])
+def compress():
+    delete_old_files()
+    if 'file' not in request.files:
+        return flash("No file part")
+
+    pdf_file = request.files.getlist('file')
+    compression_level=request.form.get('compression_level')
+    angle=request.form.get('angle')
+    pg_range=request.form.get('startPage')
+    for i in pdf_file:
+        if i.filename == '' :
+            return flash("No selected file")
+        filename = secure_filename(i.filename)
+        uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        output_file_path = os.path.join(app.config['OUTPUT_FOLDER'], filename)
+        i.save(uploaded_file_path)
+        main.compress_pdf(uploaded_file_path, output_file_path,compression_level)
+        return send_from_directory(app.config["OUTPUT_FOLDER"], filename, as_attachment=True,download_name="ImageIQ_compressed.pdf")
+
 
 @app.route('/extract_txt', methods=['POST'])
 def extract_txt():
