@@ -207,6 +207,7 @@ def extract_txt():
     return render_template('extract.html')
 @app.route('/extract_img', methods=['POST'])
 def extract_imgs():
+    delete_old_files()
     def extract_text(pdf_path):
         doc = fitz.open(pdf_path)
         text = ""
@@ -249,19 +250,8 @@ def extract_imgs():
                         img_no+=1
                     except:
                         continue
-        with open("output/All Images.pdf", "wb") as fp:
+        with open("All_Images.pdf", "wb") as fp:
             writer.write(fp)
-        os.remove(f"{app.config['OUTPUT_FOLDER']}/name.pdf")
-        return send_from_directory(app.config["OUTPUT_FOLDER"], 'All Images.pdf', as_attachment=True,download_name="ImageIQ_extracted.pdf")
-
-    def create_zip(folder_path, zip_filename):
-        with zipfile.ZipFile(zip_filename, 'w') as zipf:
-            for root, _, files in os.walk(folder_path):
-                for file in files:
-                    if file.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):
-                        file_path = os.path.join(root, file)
-                        zipf.write(file_path, os.path.relpath(file_path, folder_path))
-
     # Define a function to extract images from a PDF page
     def extract_images_from_page(pdf_path, page_num):
         doc = fitz.open(pdf_path)  # Open the PDF file using fitz
@@ -301,20 +291,8 @@ def extract_imgs():
                         img.save(img_path)
                         imgs.append(img_path)
             pdf_imgs()            
-            # Render the display_images.html template and pass the list of image filenames
-            folder_path = 'output'  # Specify the path to your folder
-            zip_filename = 'ImageIQ_extracted_imgs.zip'
-            create_zip(folder_path, zip_filename)
-            try:
-            # Check if the file exists
-                if not os.path.exists(zip_filename):
-                    raise FileNotFoundError(f"File '{zip_filename}' not found.")
-
-            # Provide the zip file for download
-                return send_file(zip_filename, as_attachment=True, download_name=zip_filename)
-        
-            except FileNotFoundError as e:
-                return str(e)
+            delete_old_files()
+            return send_file('All_Images.pdf', as_attachment=True, download_name='Extracted_Images.pdf')
         else:
             # Extract text from the PDF
             extracted_text = extract_text(pdf_path)
@@ -325,49 +303,26 @@ def extract_imgs():
     return render_template('extract.html')
 
 
-@app.route('/edit-upload', methods=['POST'])
-def edit_upload():
+
+@app.route('/convert-image', methods=['POST'])
+def convert_image_route():
     delete_old_files()
     if 'file' not in request.files:
         return flash("No file part")
 
-    img_file = request.files.getlist('file')
-    for i in img_file:
+    pdf_file = request.files.getlist('file')
+    format=str(request.form.get('output_format'))
+    print
+    for i in pdf_file:
         if i.filename == '' :
             return flash("No selected file")
         filename = secure_filename(i.filename)
         uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        output_file_path = os.path.join(app.config['OUTPUT_FOLDER'], filename)
         i.save(uploaded_file_path)
-        return render_template('edit.html')
-        
-    
-@app.route('/convert_image', methods=['POST'])
-def convert_image_route():
-    if 'input_image' not in request.files:
-        return jsonify({'error': 'No file part'})
-
-    input_image = request.files['input_image']
-    output_format = request.form['output_format']
-
-    if input_image.filename == '':
-        return jsonify({'error': 'No selected file'})
-
-    if input_image:
-        input_path = os.path.join(app.config['UPLOAD_FOLDER'], input_image.filename)
-        output_path = os.path.join(app.config['OUTPUT_FOLDER'], f'converted_{input_image.filename}')
-
-        input_image.save(input_path)
-
-        converted_path = main.convert_image(input_path, output_path, output_format)
-
-        # Clean up: remove the uploaded image after conversion
-        os.remove(input_path)
-
-        return jsonify({
-            'input_path': input_path,
-            'output_path': converted_path
-        })
+        filename = filename.partition('.')[0]+'.'+format
+        output_file_path = os.path.join(app.config['OUTPUT_FOLDER'], filename)
+        main.convert_image(uploaded_file_path, output_file_path,format)
+        return send_file(output_file_path, as_attachment=True)
 
 @app.route('/generate', methods=['POST'])
 def generate():

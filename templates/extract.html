@@ -56,6 +56,16 @@ input{
 .buttons{
   display: flex;
 }
+#extracted-text{
+  margin:2px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  font-family: sans-serif;
+  font-size: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 </style>
  <!DOCTYPE html>
  <html lang="en">
@@ -80,8 +90,9 @@ input{
          </div>
      </div>    
      {% if extracted_text %}
-     <div class="extracted-text">
-         <h2>Extracted Text:</h2>
+     <div id="extracted-text">
+      <button onclick="copy()"><i class="fa fa-download"></i></button>
+         <h2>Extracted Text: </h2>
          <pre>{{ extracted_text }}</pre>
      {% endif %}
  
@@ -100,7 +111,18 @@ input{
                  document.getElementById("extract_form").submit();
              }
          }
-     </script>
+         function copy() {
+  /* Get the text field */
+  var textToCopy = document.getElementById("extracted-text").innerText;
+  navigator.clipboard.writeText(textToCopy)
+    .then(() => {
+      alert("Copied the text: " + textToCopy);
+    })
+    .catch(err => {
+      console.error('Failed to copy: ', err);
+    });
+}
+</script>
  </body>
  </html>
  {% endblock %}

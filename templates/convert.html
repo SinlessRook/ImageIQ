@@ -46,55 +46,20 @@ img {
   <div class="container">
     <h1>Converting Format Of Image</h1>
     
-    <form id="imageForm" action="/convert_image" method="post" enctype="multipart/form-data">
+    <form id="imageForm" action="/convert-image" method="post" enctype="multipart/form-data">
         <label for="input_image">Please select image :</label>
-        <input type="file" name="input_image" id="input_image" accept=".jpg, .jpeg, .png">
+        <input type="file" name="file" id="input_image" accept=".jpg, .jpeg, .png">
         <br>
         <label for="output_format">Please select format of output :</label>
         <select name="output_format" id="output_format">
-            <option value="JPEG">JPEG</option>
-            <option value="PNG">PNG</option>
+            <option value="JPEG">jpg</option>
+            <option value="PNG">png</option>
         </select>
         <br>
         <br>
         <input type="submit" value="Convert">
     </form>
-
-    <div id="result" style="display: none;">
-        <h2>Conversion Result</h2>
-        <p id="input_image_display">Input Image: </p>
-        <p id="output_image_display">Output Image: </p>
-        <a href="/home">Go back</a>
-    </div>
   </div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const imageForm = document.getElementById("imageForm");
-    const resultDiv = document.getElementById("result");
-    const inputImageDisplay = document.getElementById("input_image_display");
-    const outputImageDisplay = document.getElementById("output_image_display");
-
-    imageForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const formData = new FormData(this);
-
-        fetch("/convert_image", {
-            method: "POST",
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            inputImageDisplay.innerHTML = "Input Image: <img src='" + data.input_path + "' alt='Input Image'>";
-            outputImageDisplay.innerHTML = "Output Image: <img src='" + data.output_path + "' alt='Output Image'>";
-            resultDiv.style.display = "block";
-        })
-        .catch(error => {
-            console.error("Error:", error);
-        });
-    });
-});
-  </script>
 </body>
 
 {% endblock %}

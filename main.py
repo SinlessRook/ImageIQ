@@ -79,10 +79,12 @@ def watermark_pdf(input_path, output_path, watermark_path):
     writer.write(output_path)
     
 def convert_image(input_path, output_path, output_format):
+    output_path=output_path.partition(".")[0] + "." + output_format
+    print("output_path",output_path)
     image = Image.open(input_path)
     image = image.convert("RGB")
-    image.save(output_path, format=output_format)
-    return output_path
+    image.save(output_path)
+    os.remove(input_path)
 
 
 def generate_image(text):
