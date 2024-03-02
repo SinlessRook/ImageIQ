@@ -328,6 +328,6 @@ def convert_image_route():
 def generate():
     text = request.form['text']
     image_path = main.generate_image(text)
-    return send_file(image_path, mimetype='image/png')
+    return send_file(image_path, mimetype='image/png',as_attachment=True)
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,6 +1,7 @@
 from pypdf import PdfReader, PdfWriter,Transformation
 import os
 from PIL import Image, ImageDraw, ImageFont
+import qrcode
 from reportlab.pdfgen import canvas
 
 
@@ -70,13 +71,6 @@ def compress_pdf(input_path, output_path,compression_value):
     with open(output_path, "wb") as f:
         writer.write(f)
     os.remove(input_path)
-def watermark_pdf(input_path, output_path, watermark_path):
-    stamp = PdfReader(watermark_path).pages[0]
-    writer = PdfWriter(clone_from=input_path)
-    for page in writer.pages:
-        page.merge_page(stamp, over=False)  # here set to False for watermarking
-
-    writer.write(output_path)
     
 def convert_image(input_path, output_path, output_format):
     output_path=output_path.partition(".")[0] + "." + output_format
@@ -88,10 +82,5 @@ def convert_image(input_path, output_path, output_format):
 
 
 def generate_image(text):
-    img = Image.new('RGB', (400, 200), color = (255, 255, 255))
-    d = ImageDraw.Draw(img)
-    font = ImageFont.truetype("arial.ttf", 20)
-    d.text((10,10), text, fill=(0,0,0), font=font)
-    img_path = "static/generated_image.png"
-    img.save(img_path)
-    return img_path
+    qrcode.make(text).save("./output/qrcode.png")
+    return "./output/qrcode.png"

@@ -184,7 +184,7 @@ input[type="text"]{
   transform: translateX(10%);
 }
 
-.container_1,.container_2,.container_3,.container_4,.container_5,.container_6{
+.container_1,.container_2,.container_3,.container_4,.container_5{
   margin-bottom: 30px;
   padding: 20px;
   background-color: #f0f0f0;
@@ -287,7 +287,7 @@ input[type="text"]{
       <h2>PDF Compressor</h2>
       <form action="compress_pdf" method="post" enctype="multipart/form-data">
       <label for="compression_level">Compression Level</label>
-      <input type="number" id="compression_level" name="compression_level" step="0.1" required placeholder="Enter the compression level in %" >
+      <input type="number" id="compression_level" name="compression_level" step="0.1">
       <div class="horizontal-centre" style="margin-top: 2rem;">
         <input type="file" id="pdf_file" name="file" accept=".pdf"  required >
         <button type="submit" class="button-72"><i class="fa fa-upload" ></i></button>
@@ -296,25 +296,10 @@ input[type="text"]{
       </div>
       <br>
     </div>
-    <div style="display: flex; justify-content: space-between;border:1px solid rgba(0, 0, 0, 0.8);"><li id="continue">Add watermark to PDF</li>
-      <button class="button-71" onclick="expand('watermark')"><i class="fa fa-check-square" id="user_button_for_watermark"></i></button>
-    </div>
-  <div id="collapse_window_for_watermark" style="display: none;">
-      <div class="container_6">
-      <h2>Add watermark to PDF</h2>
-      <form action="split_pdf" method="post" enctype="multipart/form-data">
-      <label for="watermark_file">Watermark File</label>
-      <input type="file" id="watermark_file" name="watermark_file" required>
-      <div class="horizontal-centre" style="margin-top: 2rem;">
-        <input type="file" id="pdf_file" name="file" accept=".pdf"  required >
-        <button type="submit" class="button-72"><i class="fa fa-upload" ></i></button>
-      </div>
-      </form>
-      </div>
       <br>
     </ol>
     <script>
-      List = ["split","merge","encrypt","rotate","compress","watermark"];
+      List = ["split","merge","encrypt","rotate","compress",];
       function expand(option){
         containers_to_right();
         if (document.getElementById("collapse_window_for_"+option).style.display == "block"){
@@ -337,13 +322,13 @@ input[type="text"]{
         }
       }
     function containers_to_right(){
-      containers=["container_1","container_2","container_3","container_4","container_5","container_6"];
+      containers=["container_1","container_2","container_3","container_4","container_5"];
       for (var i=0;i<containers.length;i++){
         document.getElementsByClassName(containers[i])[0].style.transform = "translateY(120%)";
       }
     }
     function containers_to_left(){
-      containers=["container_1","container_2","container_3","container_4","container_5","container_6"];
+      containers=["container_1","container_2","container_3","container_4","container_5",];
       for (var i=0;i<containers.length;i++){
         document.getElementsByClassName(containers[i])[0].style.transform = "translateY(0%)";
       }
